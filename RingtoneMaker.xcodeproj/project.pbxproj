@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C0C9330465614A959BD171E /* RingtoneMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E636491C6B27FDD70F978CE3 /* RingtoneMakerApp.swift */; };
+		9A200DE707E15DFF10E8772C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB82C21717D1DEF99D0FF98 /* ContentView.swift */; };
+		CCCCEAFF03097286FF49E64D /* TrimSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1A7B012648E9285513BCAE /* TrimSelection.swift */; };
+		5A7DF1E1042F7DC6BCC2C2A9 /* SongPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C151E9F41E621AA1393B0 /* SongPickerView.swift */; };
+		F9D4A652A91E88530B917DE6 /* TrimEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650DFFD1FFD916FB9D5C4E99 /* TrimEditorView.swift */; };
+		30559FA7DFEC534FD5B1F619 /* ExportResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35D2897B263E74D8249771E /* ExportResultView.swift */; };
+		604BB5B92B7B466EDE9B8306 /* InstallInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFF20824F0DEE9BFFD315E /* InstallInstructionsView.swift */; };
+		A4530688A996CDCB5AAA0860 /* WaveformGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002E48405646FBEC897C8E7 /* WaveformGenerator.swift */; };
+		AA69E04266E48806ACB7D1B4 /* RingtoneExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16875F67326A9330F56D67EF /* RingtoneExporter.swift */; };
+		20109FC61F75C9D8446C7340 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1F0719BBEEA9432C812DDD1 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA2AC2496E4641D191E92FAD /* RingtoneMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RingtoneMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E636491C6B27FDD70F978CE3 /* RingtoneMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneMakerApp.swift; sourceTree = "<group>"; };
+		9DB82C21717D1DEF99D0FF98 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3B1A7B012648E9285513BCAE /* TrimSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimSelection.swift; sourceTree = "<group>"; };
+		EA2C151E9F41E621AA1393B0 /* SongPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPickerView.swift; sourceTree = "<group>"; };
+		650DFFD1FFD916FB9D5C4E99 /* TrimEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimEditorView.swift; sourceTree = "<group>"; };
+		A35D2897B263E74D8249771E /* ExportResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportResultView.swift; sourceTree = "<group>"; };
+		0FBFF20824F0DEE9BFFD315E /* InstallInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallInstructionsView.swift; sourceTree = "<group>"; };
+		7002E48405646FBEC897C8E7 /* WaveformGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformGenerator.swift; sourceTree = "<group>"; };
+		16875F67326A9330F56D67EF /* RingtoneExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneExporter.swift; sourceTree = "<group>"; };
+		9EA9364CB121137C2BE3F86A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1F0719BBEEA9432C812DDD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0AD877A8312461B52A869463 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4221B103BA93F68D2A34B027 = {
+			isa = PBXGroup;
+			children = (
+				8BB6DAF1B2E5196FCC4E5780 /* RingtoneMaker */,
+				88C180250DA962E4E574D818 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		88C180250DA962E4E574D818 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA2AC2496E4641D191E92FAD /* RingtoneMaker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8BB6DAF1B2E5196FCC4E5780 /* RingtoneMaker */ = {
+			isa = PBXGroup;
+			children = (
+				E636491C6B27FDD70F978CE3 /* RingtoneMakerApp.swift */,
+				9DB82C21717D1DEF99D0FF98 /* ContentView.swift */,
+				6404778AA088509AD7F4F565 /* Models */,
+				280D42C41BADE4AF94D483F9 /* Views */,
+				AC0006E6A4FB5CE1B6043381 /* Engine */,
+				CD8321AA52C7F9F826F0421E /* Resources */,
+				9EA9364CB121137C2BE3F86A /* Info.plist */,
+			);
+			path = RingtoneMaker;
+			sourceTree = "<group>";
+		};
+		6404778AA088509AD7F4F565 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3B1A7B012648E9285513BCAE /* TrimSelection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		280D42C41BADE4AF94D483F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EA2C151E9F41E621AA1393B0 /* SongPickerView.swift */,
+				650DFFD1FFD916FB9D5C4E99 /* TrimEditorView.swift */,
+				A35D2897B263E74D8249771E /* ExportResultView.swift */,
+				0FBFF20824F0DEE9BFFD315E /* InstallInstructionsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AC0006E6A4FB5CE1B6043381 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				7002E48405646FBEC897C8E7 /* WaveformGenerator.swift */,
+				16875F67326A9330F56D67EF /* RingtoneExporter.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		CD8321AA52C7F9F826F0421E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E1F0719BBEEA9432C812DDD1 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4E707ED49022EB2A36A6CA67 /* RingtoneMaker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57EB809574EBE3667EBD0291 /* Build configuration list for PBXNativeTarget "RingtoneMaker" */;
+			buildPhases = (
+				32CD0E4B469A2C4D7F357E32 /* Sources */,
+				0AD877A8312461B52A869463 /* Frameworks */,
+				9F912ED96BBE9B8A9C9854D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RingtoneMaker;
+			productName = RingtoneMaker;
+			productReference = AA2AC2496E4641D191E92FAD /* RingtoneMaker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C58BD4544C656BC58F822624 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					4E707ED49022EB2A36A6CA67 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 57E435C9FDE7C7EA3E8A2305 /* Build configuration list for PBXProject "RingtoneMaker" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4221B103BA93F68D2A34B027;
+			productRefGroup = 88C180250DA962E4E574D818 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4E707ED49022EB2A36A6CA67 /* RingtoneMaker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9F912ED96BBE9B8A9C9854D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20109FC61F75C9D8446C7340 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32CD0E4B469A2C4D7F357E32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C0C9330465614A959BD171E /* RingtoneMakerApp.swift in Sources */,
+				9A200DE707E15DFF10E8772C /* ContentView.swift in Sources */,
+				CCCCEAFF03097286FF49E64D /* TrimSelection.swift in Sources */,
+				5A7DF1E1042F7DC6BCC2C2A9 /* SongPickerView.swift in Sources */,
+				F9D4A652A91E88530B917DE6 /* TrimEditorView.swift in Sources */,
+				30559FA7DFEC534FD5B1F619 /* ExportResultView.swift in Sources */,
+				604BB5B92B7B466EDE9B8306 /* InstallInstructionsView.swift in Sources */,
+				A4530688A996CDCB5AAA0860 /* WaveformGenerator.swift in Sources */,
+				AA69E04266E48806ACB7D1B4 /* RingtoneExporter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0105B69DED940DE09DF79DFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D7DCBEFC1EEC1EF74BD4AA4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CBF126D0370673B257EA7620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RingtoneMaker/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.replacementshost.RingtoneMaker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		9DF1AFF2544B0CD13748442C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RingtoneMaker/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.replacementshost.RingtoneMaker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		57E435C9FDE7C7EA3E8A2305 /* Build configuration list for PBXProject "RingtoneMaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0105B69DED940DE09DF79DFC /* Debug */,
+				D7DCBEFC1EEC1EF74BD4AA4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57EB809574EBE3667EBD0291 /* Build configuration list for PBXNativeTarget "RingtoneMaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBF126D0370673B257EA7620 /* Debug */,
+				9DF1AFF2544B0CD13748442C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C58BD4544C656BC58F822624 /* Project object */;
+}
