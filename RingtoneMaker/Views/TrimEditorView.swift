@@ -205,7 +205,7 @@ private struct WaveformTrimView: View {
     @Binding var selection: TrimSelection
     let previewFraction: Double?
 
-    private let handleWidth: CGFloat = 32
+    private let handleWidth: CGFloat = 20
 
     /// Captured at the start of a whole-selection drag so shifts are computed
     /// as a delta from the gesture's origin rather than compounding per frame.
@@ -263,14 +263,14 @@ private struct WaveformTrimView: View {
                 }
 
                 handle(at: startX, geometryWidth: width) { newX in
-                    let newStart = sourceDuration * Double(newX / width)
+                    let newStart = min(sourceDuration * Double(newX / width), selection.end)
                     let clamped = TrimSelection.clamped(start: newStart, end: selection.end, sourceDuration: sourceDuration)
                     selection.start = clamped.start
                     selection.end = clamped.end
                 }
 
                 handle(at: endX, geometryWidth: width) { newX in
-                    let newEnd = sourceDuration * Double(newX / width)
+                    let newEnd = max(sourceDuration * Double(newX / width), selection.start)
                     let clamped = TrimSelection.clamped(start: selection.start, end: newEnd, sourceDuration: sourceDuration)
                     selection.start = clamped.start
                     selection.end = clamped.end

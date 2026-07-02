@@ -32,6 +32,8 @@ struct TrimSelection {
             e = sourceDuration
             s = max(0, e - maxDuration)
         }
+        // Never allow the handles to cross: a negative duration isn't real.
+        e = max(e, s)
         return (s, e)
     }
 }
