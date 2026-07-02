@@ -7,7 +7,6 @@ struct ExportResultView: View {
 
     @State private var isSharePresented = false
     @State private var showInstructions = false
-    @State private var activityController: UIActivityViewController?
 
     var body: some View {
         VStack(spacing: 24) {
@@ -35,7 +34,6 @@ struct ExportResultView: View {
             .buttonStyle(.bordered)
             .controlSize(.large)
             .padding(.horizontal, 32)
-            .disabled(activityController == nil || isSharePresented)
 
             Button {
                 showInstructions = true
@@ -52,19 +50,8 @@ struct ExportResultView: View {
         }
         .navigationTitle("Export")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            // UIActivityViewController's first presentation has a noticeable
-            // one-time cost (enumerating share extensions/apps that can
-            // handle the file). Building it now, while the user is still
-            // reading this screen, hides most of that behind the tap.
-            if activityController == nil {
-                activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-            }
-        }
         .sheet(isPresented: $isSharePresented) {
-            if let activityController = activityController {
-                ActivitySheet(controller: activityController)
-            }
+            ShareSheet(items: [fileURL])
         }
         .navigationDestination(isPresented: $showInstructions) {
             InstallInstructionsView()
@@ -72,13 +59,12 @@ struct ExportResultView: View {
     }
 }
 
-/// Presents a pre-built `UIActivityViewController` instance rather than
-/// constructing one at presentation time.
-private struct ActivitySheet: UIViewControllerRepresentable {
-    let controller: UIActivityViewController
+/// Thin wrapper around `UIActivityViewController`.
+private struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
-        controller
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
     }
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
