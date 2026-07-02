@@ -19,9 +19,11 @@ struct ExportResultView: View {
             Text("Ringtone Ready")
                 .font(.title.bold())
 
-            Text(fileURL.deletingPathExtension().lastPathComponent)
-                .font(.footnote)
+            Text("Your ringtone is saved as a file. Share it now, or follow the steps to actually install it as your ringtone.")
+                .font(.subheadline)
                 .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
 
             Button {
                 isSharePresented = true

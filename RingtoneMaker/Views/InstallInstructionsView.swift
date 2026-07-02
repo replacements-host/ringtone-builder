@@ -5,44 +5,90 @@ import SwiftUI
 /// do this directly. GarageBand is the primary path (works with no Mac);
 /// Finder/Mac is offered as an alternative.
 struct InstallInstructionsView: View {
-    private enum Path: String, CaseIterable, Identifiable {
+    private enum InstallPath: String, CaseIterable, Identifiable {
         case garageBand = "No Mac (GarageBand)"
         case finder = "With a Mac (Finder)"
         var id: String { rawValue }
     }
 
-    @State private var path: Path = .garageBand
+    private struct Step {
+        let icon: String
+        let title: String
+        let detail: String
+    }
+
+    private static let garageBandSteps: [Step] = [
+        Step(
+            icon: "waveform",
+            title: "Open GarageBand on Your iPhone",
+            detail: "GarageBand is a free Apple app — install it from the App Store if you don't have it. Then tap your exported file in Files, choose \"Share\" > \"Open in GarageBand\"."
+        ),
+        Step(
+            icon: "square.and.arrow.up.on.square",
+            title: "Share as Ringtone",
+            detail: "In GarageBand, tap the song title, then \"Share Song\" (or the Share icon) and choose \"Ringtone\". GarageBand has a direct \"Use as Ringtone\" option since it's a first-party Apple app."
+        ),
+        Step(
+            icon: "checkmark.seal",
+            title: "Confirm",
+            detail: "GarageBand will save it directly into your ringtones — you can now select it in Settings."
+        ),
+    ]
+
+    private static let finderSteps: [Step] = [
+        Step(
+            icon: "cable.connector",
+            title: "Connect to a Mac",
+            detail: "Connect your iPhone to a Mac with a cable, then open Finder."
+        ),
+        Step(
+            icon: "sidebar.left",
+            title: "Select Your Device",
+            detail: "In Finder's sidebar, select your iPhone under Locations."
+        ),
+        Step(
+            icon: "arrow.down.doc",
+            title: "Drag the File In",
+            detail: "Open the \"Tones\" section for your device, then drag the .m4r file (from Files, AirDrop, or wherever you saved it) into that section."
+        ),
+    ]
+
+    @State private var path: InstallPath = .garageBand
+    @State private var currentPage = 0
+
+    private var steps: [Step] {
+        path == .garageBand ? Self.garageBandSteps : Self.finderSteps
+    }
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Your ringtone is saved as a file. Now let's get it onto your phone as an actual ringtone.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 24)
-                .padding(.top, 12)
-
+        VStack(spacing: 16) {
             Picker("Path", selection: $path) {
-                ForEach(Path.allCases) { p in
+                ForEach(InstallPath.allCases) { p in
                     Text(p.rawValue).tag(p)
                 }
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 24)
+            .padding(.top, 12)
 
-            TabView {
-                switch path {
-                case .garageBand:
-                    garageBandCards
-                case .finder:
-                    finderCards
+            TabView(selection: $currentPage) {
+                ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
+                    InstructionCard(step: index + 1, icon: step.icon, title: step.title, detail: step.detail)
+                        .tag(index)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
-            .safeAreaInset(edge: .bottom) {
-                Color.clear.frame(height: 28)
-            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(maxHeight: .infinity)
+
+            // Custom page indicator: takes normal layout space, so it can
+            // never overlap card content the way the system page-dot overlay did.
+            HStack(spacing: 8) {
+                ForEach(steps.indices, id: \.self) { index in
+                    Circle()
+                        .fill(index == currentPage ? Color.accentColor : Color.secondary.opacity(0.3))
+                        .frame(width: 7, height: 7)
+                }
+            }
 
             finalStepCard
                 .padding(.horizontal, 24)
@@ -50,50 +96,9 @@ struct InstallInstructionsView: View {
         }
         .navigationTitle("Install It")
         .navigationBarTitleDisplayMode(.inline)
-    }
-
-    @ViewBuilder
-    private var garageBandCards: some View {
-        InstructionCard(
-            step: 1,
-            icon: "waveform",
-            title: "Open GarageBand on Your iPhone",
-            detail: "GarageBand is a free Apple app — install it from the App Store if you don't have it. Then tap your exported file in Files, choose \"Share\" > \"Open in GarageBand\"."
-        )
-        InstructionCard(
-            step: 2,
-            icon: "square.and.arrow.up.on.square",
-            title: "Share as Ringtone",
-            detail: "In GarageBand, tap the song title, then \"Share Song\" (or the Share icon) and choose \"Ringtone\". GarageBand has a direct \"Use as Ringtone\" option since it's a first-party Apple app."
-        )
-        InstructionCard(
-            step: 3,
-            icon: "checkmark.seal",
-            title: "Confirm",
-            detail: "GarageBand will save it directly into your ringtones — you can now select it in Settings."
-        )
-    }
-
-    @ViewBuilder
-    private var finderCards: some View {
-        InstructionCard(
-            step: 1,
-            icon: "cable.connector",
-            title: "Connect to a Mac",
-            detail: "Connect your iPhone to a Mac with a cable, then open Finder."
-        )
-        InstructionCard(
-            step: 2,
-            icon: "sidebar.left",
-            title: "Select Your Device",
-            detail: "In Finder's sidebar, select your iPhone under Locations."
-        )
-        InstructionCard(
-            step: 3,
-            icon: "arrow.down.doc",
-            title: "Drag the File In",
-            detail: "Open the \"Tones\" section for your device, then drag the .m4r file (from Files, AirDrop, or wherever you saved it) into that section."
-        )
+        .onChange(of: path) { _, _ in
+            currentPage = 0
+        }
     }
 
     private var finalStepCard: some View {
