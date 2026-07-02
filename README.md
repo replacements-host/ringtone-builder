@@ -89,19 +89,59 @@ RingtoneMaker/
 
 ## Before submitting to the App Store
 
-- [ ] Real app icon (currently a placeholder `AppIcon.appiconset` entry with
-      no image assets — Xcode will complain until a 1024x1024 icon is added)
-- [ ] Test on a physical device: DRM/streaming filter, handle drag precision,
-      preview stop-at-boundary accuracy, fade audible in the *exported* file
-      (not just preview), and the full GarageBand install path end-to-end
-      with no Mac involved
-- [ ] Test the Finder/Mac install path as a secondary check
-- [ ] App Store Connect: Privacy section (media library access only, "Data
-      Not Collected" for everything else), $2.99 price tier, and a visible
-      IP-use disclaimer (in-app or in the listing) stating the app is for
-      music the user owns or has rights to use as a personal ringtone
-- [ ] Screenshots: waveform trim screen + install-instructions cards (the
-      trust-builder for buyers wary of bad ringtone apps)
+### Project / assets
+- [ ] Real app icon — currently a placeholder `AppIcon.appiconset` entry with
+      no image assets. Xcode's Archive validation will reject a submission
+      without a 1024x1024 App Store icon.
+- [x] `ITSAppUsesNonExemptEncryption = NO` set in Info.plist (no network
+      calls, no custom crypto — this is accurate and skips the export
+      compliance question on every upload)
+
+### Apple Developer account / signing (only you can do this)
+- [ ] Enroll in the Apple Developer Program if you haven't ($99/year)
+- [ ] In Xcode's Signing & Capabilities tab, select your Team — this writes
+      `DEVELOPMENT_TEAM` into the project, which isn't set yet since it's
+      account-specific
+- [ ] Register the bundle ID (`com.replacementshost.RingtoneMaker` is a
+      placeholder in the project — change it to whatever you want to own,
+      then register that exact ID in the Apple Developer portal)
+- [ ] Create the app record in App Store Connect with that bundle ID
+
+### On-device QA (per the plan's acceptance criteria)
+- [x] DRM/streaming filter shows a friendly message instead of failing
+- [x] Handle drag precision (edges can't cross, center-drag shifts the
+      whole selection)
+- [x] Preview plays and stops at the selection boundary, with a moving
+      playhead
+- [ ] Fade in/out audible in the **exported** file, not just the preview
+- [ ] Full GarageBand install path end-to-end with no Mac involved
+- [ ] Finder/Mac install path as a secondary check
+
+### App Store Connect metadata
+- [ ] Price tier: $2.99
+- [ ] Privacy section: media library access only, "Data Not Collected" for
+      everything else
+- [ ] Privacy Policy URL (Apple asks for one even for "no data collected"
+      apps in most cases — a simple static page is enough; ask if you want
+      help drafting one)
+- [ ] Support URL
+- [ ] App description, keywords, and screenshots — see the marketing notes
+      below; screenshots need the waveform trim screen and the
+      install-instructions cards (the actual trust-builder here)
+- [ ] Age rating questionnaire (nothing unusual here — standard utility app)
+
+### Marketing / listing copy
+Given how few people still have locally-owned, DRM-free music (most
+listening is via streaming), be explicit in the description and screenshots
+about who this is for — people with old iTunes purchases, ripped CDs,
+Bandcamp/direct-MP3 purchases, or their own recordings — and be upfront that
+**Spotify isn't supported at all** (never appears in the picker) and
+**Apple Music streaming/downloaded tracks aren't supported** (DRM-protected,
+filtered out with an explanatory message). Also include the IP-use
+disclaimer somewhere visible in the listing — the app already shows a
+caption on the picker screen ("For use with music you own or have the
+rights to use as a personal ringtone"), and the same phrasing should appear
+in the App Store description per Guideline 5.2.1/5.2.3.
 
 See the original implementation plan for full rationale and the App Review
-risk notes (Guideline 5.2.1/5.2.3).
+risk notes.
