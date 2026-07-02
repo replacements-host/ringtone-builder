@@ -16,7 +16,8 @@ struct TrimEditorView: View {
 
     @State private var player: AVAudioPlayer?
     @State private var isPreviewing = false
-    @State private var previewStopTimer: Timer?
+    @State private var previewCurrentTime: TimeInterval?
+    @State private var previewTimer: Timer?
 
     @State private var isExporting = false
     @State private var exportError: String?
@@ -37,7 +38,8 @@ struct TrimEditorView: View {
                 WaveformTrimView(
                     waveform: waveform,
                     sourceDuration: sourceDuration,
-                    selection: $selection
+                    selection: $selection,
+                    previewFraction: previewFraction
                 )
                 .frame(height: 140)
                 .padding(.horizontal)
@@ -86,12 +88,19 @@ struct TrimEditorView: View {
         .padding(.top)
         .navigationTitle("Trim")
         .navigationBarTitleDisplayMode(.inline)
+        .background(SwipeBackDisabler())
         .task {
             await loadAsset()
         }
         .onDisappear {
             stopPreview()
         }
+    }
+
+    /// Playhead position as a 0...1 fraction of the current selection, or nil when not previewing.
+    private var previewFraction: Double? {
+        guard let previewCurrentTime = previewCurrentTime, selection.duration > 0 else { return nil }
+        return min(max((previewCurrentTime - selection.start) / selection.duration, 0), 1)
     }
 
     private func loadAsset() async {
@@ -131,16 +140,28 @@ struct TrimEditorView: View {
     private func startPreview() {
         guard let url = mediaItem.assetURL else { return }
         do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
             let newPlayer = try AVAudioPlayer(contentsOf: url)
             newPlayer.currentTime = selection.start
-            newPlayer.play()
+            guard newPlayer.play() else {
+                exportError = "Couldn't preview this song."
+                return
+            }
             player = newPlayer
             isPreviewing = true
+            previewCurrentTime = selection.start
+            exportError = nil
 
-            let remaining = selection.duration
-            previewStopTimer?.invalidate()
-            previewStopTimer = Timer.scheduledTimer(withTimeInterval: remaining, repeats: false) { _ in
-                stopPreview()
+            previewTimer?.invalidate()
+            previewTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 30.0, repeats: true) { _ in
+                guard let player = player else { return }
+                if player.currentTime >= selection.end || !player.isPlaying {
+                    stopPreview()
+                } else {
+                    previewCurrentTime = player.currentTime
+                }
             }
         } catch {
             exportError = "Couldn't preview this song."
@@ -148,11 +169,12 @@ struct TrimEditorView: View {
     }
 
     private func stopPreview() {
-        previewStopTimer?.invalidate()
-        previewStopTimer = nil
+        previewTimer?.invalidate()
+        previewTimer = nil
         player?.stop()
         player = nil
         isPreviewing = false
+        previewCurrentTime = nil
     }
 
     private func exportRingtone() async {
@@ -175,13 +197,19 @@ struct TrimEditorView: View {
     }
 }
 
-/// Renders the waveform and two draggable trim handles.
+/// Renders the waveform, the two draggable trim handles, a drag-to-shift
+/// region for moving the whole selection, and a playhead during preview.
 private struct WaveformTrimView: View {
     let waveform: [Float]
     let sourceDuration: TimeInterval
     @Binding var selection: TrimSelection
+    let previewFraction: Double?
 
-    private let handleWidth: CGFloat = 24
+    private let handleWidth: CGFloat = 32
+
+    /// Captured at the start of a whole-selection drag so shifts are computed
+    /// as a delta from the gesture's origin rather than compounding per frame.
+    @State private var shiftAnchor: (start: TimeInterval, end: TimeInterval)?
 
     var body: some View {
         GeometryReader { geometry in
@@ -202,10 +230,37 @@ private struct WaveformTrimView: View {
                     }
                 }
 
+                // Whole-selection region: tap-and-drag here shifts start and end together.
                 Rectangle()
                     .fill(Color.accentColor.opacity(0.15))
                     .frame(width: max(0, endX - startX))
                     .offset(x: startX)
+                    .contentShape(Rectangle())
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                let anchor = shiftAnchor ?? (selection.start, selection.end)
+                                if shiftAnchor == nil { shiftAnchor = anchor }
+                                let deltaSeconds = Double(value.translation.width / width) * sourceDuration
+                                let duration = anchor.end - anchor.start
+                                var newStart = anchor.start + deltaSeconds
+                                newStart = max(0, min(newStart, sourceDuration - duration))
+                                selection.start = newStart
+                                selection.end = newStart + duration
+                            }
+                            .onEnded { _ in
+                                shiftAnchor = nil
+                            }
+                    )
+
+                if let previewFraction = previewFraction {
+                    let playheadX = startX + CGFloat(previewFraction) * (endX - startX)
+                    Rectangle()
+                        .fill(Color.white)
+                        .frame(width: 2)
+                        .shadow(radius: 1)
+                        .offset(x: playheadX)
+                }
 
                 handle(at: startX, geometryWidth: width) { newX in
                     let newStart = sourceDuration * Double(newX / width)
@@ -227,16 +282,40 @@ private struct WaveformTrimView: View {
     private func handle(at x: CGFloat, geometryWidth: CGFloat, onDrag: @escaping (CGFloat) -> Void) -> some View {
         Capsule()
             .fill(Color.accentColor)
-            .frame(width: 6, height: 90)
+            .frame(width: 8, height: 90)
             .contentShape(Rectangle().size(width: handleWidth, height: 120))
             .frame(width: handleWidth, height: 120)
             .offset(x: x - handleWidth / 2)
             .gesture(
-                DragGesture()
+                DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        let clampedX = min(max(0, value.location.x), geometryWidth)
+                        let clampedX = min(max(0, value.location.x + x - handleWidth / 2), geometryWidth)
                         onDrag(clampedX)
                     }
             )
+    }
+}
+
+/// Disables the interactive edge-swipe-to-go-back gesture while this screen
+/// is visible, since the left trim handle sits right where that gesture
+/// starts and the two conflict. Restores it on disappear so back-swipe still
+/// works everywhere else.
+private struct SwipeBackDisabler: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        SwipeBackDisablingViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+
+    private final class SwipeBackDisablingViewController: UIViewController {
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        }
+
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        }
     }
 }

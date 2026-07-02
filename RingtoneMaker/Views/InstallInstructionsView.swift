@@ -39,6 +39,7 @@ struct InstallInstructionsView: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
+            .frame(maxHeight: .infinity)
 
             finalStepCard
                 .padding(.horizontal, 24)
@@ -53,8 +54,8 @@ struct InstallInstructionsView: View {
         InstructionCard(
             step: 1,
             icon: "waveform",
-            title: "Open GarageBand",
-            detail: "Open the exported ringtone file with GarageBand — tap the file in Files, then \"Share\" > \"Open in GarageBand\", or open GarageBand and start a new audio recorder project, then import the file."
+            title: "Open GarageBand on Your iPhone",
+            detail: "GarageBand is a free Apple app — install it from the App Store if you don't have it. Then tap your exported file in Files, choose \"Share\" > \"Open in GarageBand\"."
         )
         InstructionCard(
             step: 2,
@@ -113,28 +114,31 @@ private struct InstructionCard: View {
     let detail: String
 
     var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.system(size: 48))
-                .foregroundStyle(.tint)
-                .padding(.top, 24)
+        ScrollView {
+            VStack(spacing: 16) {
+                Image(systemName: icon)
+                    .font(.system(size: 48))
+                    .foregroundStyle(.tint)
+                    .padding(.top, 24)
 
-            Text("Step \(step)")
-                .font(.caption.bold())
-                .foregroundStyle(.secondary)
+                Text("Step \(step)")
+                    .font(.caption.bold())
+                    .foregroundStyle(.secondary)
 
-            Text(title)
-                .font(.title2.bold())
+                Text(title)
+                    .font(.title2.bold())
+                    .multilineTextAlignment(.center)
 
-            Text(detail)
-                .font(.body)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 32)
-
-            Spacer()
+                Text(detail)
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 32)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.bottom, 24)
         }
-        .padding(.bottom, 24)
     }
 }
 
