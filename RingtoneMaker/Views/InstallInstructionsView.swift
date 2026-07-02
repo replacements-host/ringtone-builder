@@ -39,6 +39,9 @@ struct InstallInstructionsView: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
+            .safeAreaInset(edge: .bottom) {
+                Color.clear.frame(height: 28)
+            }
             .frame(maxHeight: .infinity)
 
             finalStepCard

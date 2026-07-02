@@ -287,9 +287,9 @@ private struct WaveformTrimView: View {
             .frame(width: handleWidth, height: 120)
             .offset(x: x - handleWidth / 2)
             .gesture(
-                DragGesture(minimumDistance: 0)
+                DragGesture()
                     .onChanged { value in
-                        let clampedX = min(max(0, value.location.x + x - handleWidth / 2), geometryWidth)
+                        let clampedX = min(max(0, value.location.x), geometryWidth)
                         onDrag(clampedX)
                     }
             )
